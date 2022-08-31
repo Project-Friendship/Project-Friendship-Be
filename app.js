@@ -35,7 +35,6 @@ const eventLogs = require("./routes/EventLogs");
 const childRoute = require("./routes/Child");
 const childRelationshipRoute = require("./routes/ChildRelationship");
 
-app.use('',(request, response)=>{ response.send("App is running");})
 app.use('/users', usersRoute);
 app.use('/register', registerRoute);
 app.use('/relationship', relationshipRoute);
@@ -44,6 +43,7 @@ app.use('/events', eventsRoute);
 app.use('/log', eventLogs);
 app.use('/child', childRoute);
 app.use('/childrs', childRelationshipRoute);
+app.use('',(request, response)=>{ response.send("App is running");})
  
 
 app.use(function(request, response, next) {
