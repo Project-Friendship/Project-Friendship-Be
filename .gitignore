@@ -1,6 +1,1 @@
-BarcodeRS/
-node_modules
-
-!pf-server/routes/*
-.expo
-Broken/
+node_modules/
