@@ -43,8 +43,6 @@ app.use('/events', eventsRoute);
 app.use('/log', eventLogs);
 app.use('/child', childRoute);
 app.use('/childrs', childRelationshipRoute);
-app.use('',(request, response)=>{ response.send("App is running");})
- 
 
 app.use(function(request, response, next) {
   // catch 404 and forward to error handler
