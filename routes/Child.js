@@ -50,7 +50,7 @@ router.post('/', (request, response) => {
     pool.query('INSERT INTO child (fname, lname, dob, school, pronouns, notes) VALUES ($1, $2, $3, $4, $5, $6)',
 	       [fname, lname, dob, school, pronouns, notes])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>
@@ -187,7 +187,7 @@ router.put('/dobSearch', (request, response) => {
     console.log(`Got request to delete previously created sessions, will remove ${cid} from child table if exists`);
     pool.query('DELETE FROM child WHERE cid = $1', [cid])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>

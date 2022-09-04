@@ -58,7 +58,7 @@ router.post('/', (request, response) => {
     pool.query('INSERT INTO childrelationship (cid, email, isparent) VALUES ($1, $2, $3)',
 	       [cid, email, isParent])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>

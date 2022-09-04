@@ -17,7 +17,7 @@ router.post('/', (request, response) => {
     pool.query('INSERT INTO users (email, fname, lname, role, phone, pronouns) VALUES ($1, $2, $3, $4, $5, $6)',
 	       [email, fname, lname, role, phone, pronouns])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>
@@ -46,7 +46,7 @@ router.delete('/', (request, response) => {
     console.log(`Got request to delete user, will remove ${email} from users table`);
     pool.query('DELETE FROM users WHERE email = $1', [email])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>

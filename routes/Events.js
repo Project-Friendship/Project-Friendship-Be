@@ -14,7 +14,7 @@ router.post('/', (request, response) => {
 	'INSERT INTO events (author, cid, title, stat, descrip, eventDate, eventCreated, eventLocation, approvedBy) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
 	       [author, cid, title, stat, descrip, eventDate, eventCreated, eventLocation, approvedBy])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>
@@ -108,7 +108,7 @@ router.delete('/', (request, response) => {
      from EVENTS table if exists`);
     pool.query('DELETE FROM events WHERE eid = $1', [eid])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>

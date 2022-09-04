@@ -11,7 +11,7 @@ router.post('/', (request, response) => {
 	'INSERT INTO log (eid, mentoremail, duration) VALUES ($1, $2, $3)',
 	       [eid, email, duration])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>
@@ -39,7 +39,7 @@ router.delete('/', (request, response) => {
     console.log(`Got request to delete log under lid: ${lid} from log table.`);
     pool.query('DELETE FROM log WHERE lid = $1', [lid])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>
@@ -53,7 +53,7 @@ router.delete('/', (request, response) => {
     console.log(`Got request to delete log under email: ${email} from log table.`);
     pool.query('DELETE FROM log WHERE mentoremail = $1', [email])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>

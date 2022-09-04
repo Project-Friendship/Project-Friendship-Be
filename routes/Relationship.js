@@ -10,7 +10,7 @@ router.post('/', (request, response) => {
     pool.query('INSERT INTO relationships (person1, person2, role1, role2) VALUES ($1, $2, $3, $4)',
 	       [person1, person2, 'mentee', 'parent'])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>
@@ -64,7 +64,7 @@ router.delete('/', (request, response) => {
 	console.log("Delete all relationships for email: " + email)
     pool.query('DELETE from relationships WHERE person1 = $1 OR person2 = $1', [email])
 	.then(res => {
-		console.log('DB response: ' + res.rows[0]);
+		console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200);
 	})
 	.catch(err =>

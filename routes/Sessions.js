@@ -10,7 +10,7 @@ router.delete('/', (request, response) => {
     console.log(`Got request to delete previously created sessions, will remove ${sid}, ${email} from session table if exists`);
     pool.query('DELETE FROM SESSIONS WHERE sid = $1 OR email = $2', [sid, email])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>
@@ -27,7 +27,7 @@ router.post('/', (request, response) => {
     pool.query('INSERT INTO sessions (sid, email, notiftoken) VALUES ($1, $2, $3)',
 	       [sid, email, notiftoken])
 	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.sendStatus(200)
 	})
 	.catch(err =>
