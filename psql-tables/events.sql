@@ -1,6 +1,6 @@
 -- set up relationship table
 -- pending, approved, expired/completed/removed
-create table events (
+create table pf.events (
     eid serial primary key,
     author text,
     cid int,
@@ -19,7 +19,7 @@ create table events (
 ---- completed: event was completed and logged
 ---- expired: event request was not approved before the time expired...
 
-create table log (
+create table pf.log (
     lid serial primary key,
     eid int,
     mentorEmail text,

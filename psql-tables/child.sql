@@ -1,5 +1,5 @@
-create table child (
-    cid primary key,
+create table pf.child (
+    cid serial primary key,
     fname text,
     lname text,
     dob text,

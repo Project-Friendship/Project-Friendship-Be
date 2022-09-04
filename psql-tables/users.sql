@@ -1,7 +1,7 @@
 -- creates table for profiles
 -- if login does not exists, email is set to  
 
-create table users (
+create table pf.users (
     email text primary key,
     fname text,
     lname text,
@@ -19,7 +19,7 @@ create table users (
 -- create function addUser(email, fname, lname, role) returns
 
 -- table of users that have requested to sign up
-create table registerRequests (
+create table pf.registerRequests (
     email text primary key,
     fname text,
     lname text,

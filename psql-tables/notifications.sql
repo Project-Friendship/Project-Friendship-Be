@@ -1,4 +1,4 @@
-create table notifications (
+create table pf.notifications (
     nid serial primary key,
     title text,
     descrip text,
