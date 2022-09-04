@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/', (request, response) => {
+router.get('/', (request, response) => {
 	    response.send("App is running")
 })
 
