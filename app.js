@@ -34,6 +34,7 @@ const eventsRoute = require("./routes/Events");
 const eventLogs = require("./routes/EventLogs");
 const childRoute = require("./routes/Child");
 const childRelationshipRoute = require("./routes/ChildRelationship");
+const rootRoute = require("./routes/Root");
 
 app.use('/users', usersRoute);
 app.use('/register', registerRoute);
@@ -43,6 +44,7 @@ app.use('/events', eventsRoute);
 app.use('/log', eventLogs);
 app.use('/child', childRoute);
 app.use('/childrs', childRelationshipRoute);
+app.use('/', rootRoute);
 
 app.use(function(request, response, next) {
   // catch 404 and forward to error handler
