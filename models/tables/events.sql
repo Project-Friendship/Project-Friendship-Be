@@ -10,7 +10,7 @@ create table pf.events (
     eventDate text,
     eventCreated text,
     eventLocation text,
-    approvedBy text
+    approvedBy text default 'null'
 );
 
 -- stat:

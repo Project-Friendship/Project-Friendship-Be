@@ -102,7 +102,7 @@ router.put('/findParentEmail', (request, response) => {
 	console.log("Retrive parent emails for given cid: " + cid)
     pool.query('SELECT email from childrelationship WHERE cid = $1 and isparent = $2', [cid, isParent])
 	.then(res => {
-	    console.log('DB response: ' + JSON.stringify(res.rows[0]));
+	    console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.send(res.rows);
 	})
 	.catch(err =>
@@ -126,5 +126,18 @@ router.put('/checkDuplicateRS', (request, response) => {
 	       }));
 })
 
+router.put('/notify', (request, response) => {
+    let { email, cid } = request.body;
+	console.log("Retrive all emails to notify for: " + email)
+    pool.query('SELECT email from childrelationship WHERE cid = $2 and email != $1', [email,cid])
+	.then(res => {
+	    console.log('DB response: ' + JSON.stringify(res.rows));
+	    response.send(res.rows);
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
 
 module.exports = router;

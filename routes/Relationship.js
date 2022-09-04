@@ -45,6 +45,20 @@ router.put('/', (request, response) => {
 	       }));
 })
 
+router.put('/notify', (request, response) => {
+    let { email, cid } = request.body;
+	console.log("Retrive all emails to notify for: " + email)
+    pool.query('SELECT email from childrelationship WHERE cid = $2 and email != email', [email])
+	.then(res => {
+	    console.log('DB response: ' + JSON.stringify(res.rows));
+	    response.send(res.rows);
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
 router.delete('/', (request, response) => {
     let email = request.body.email;
 	console.log("Delete all relationships for email: " + email)
