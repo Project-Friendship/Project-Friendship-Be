@@ -5,7 +5,7 @@ const pool = require('./index');
 router.get('/', (request, response) => {
     pool.query('SELECT * FROM users')
 	.then(res => {
-	    console.log('DB response: ' + JSON.stringify(res.rows));
+	    // console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.send(res.rows);
 	})
 	.catch(err => setImmediate(() => { throw err; })); })
@@ -26,9 +26,9 @@ router.post('/', (request, response) => {
 	       }));
 })
 
-router.put('/', (request, response) => {
+router.get('/:email', (request, response) => {
     console.log(`Got request to check if email`);
-	let email = request.body.email;
+	let email = request.params.email;
 	console.log("Check for email: " + email)
     pool.query('SELECT * FROM users where email = ($1)', [email])
 	.then(res => {
@@ -41,8 +41,8 @@ router.put('/', (request, response) => {
 	       }));
 })
 
-router.delete('/', (request, response) => {
-    let email = request.body.email;
+router.delete('/:email', (request, response) => {
+    let email = request.params.email;
     console.log(`Got request to delete user, will remove ${email} from users table`);
     pool.query('DELETE FROM users WHERE email = $1', [email])
 	.then(res => {

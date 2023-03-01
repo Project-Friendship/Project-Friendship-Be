@@ -151,9 +151,10 @@ router.put('/', (request, response) => {
  *      '200':
  *        description: a child object
  */
-router.put('/dobSearch', (request, response) => {
-    console.log(`Got request to get child of given cid`);
-	let { lname, dob } = request.body;
+router.get('/dobSearch', (request, response) => {
+	const {lname, dob} = request.query;
+	if(!lname || !dob) throw new Error("lname and dob are required")
+	console.log(`Got request to get child of given cid`);
 	console.log("Check for lname and dob in child")
     pool.query('SELECT * FROM child where lname = ($1) AND dob = ($2)', [lname, dob])
 	.then(res => {

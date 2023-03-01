@@ -1,5 +1,5 @@
 const express = require('express');
-
+const dotenv = require("dotenv").config();
 var bodyParser = require('body-parser');
 const { Pool } = require('pg');
 
@@ -11,17 +11,21 @@ const lib = require('../mcalib');
 lib.setErrorPrefix(__filename);  // set label for lib error messages
 
 // database connection parameters
-const host = process.env.DBHOST
-const user = process.env.USER;    // CHANGE to your username, e.g., jones1
-const password = process.env.PASSWORD;  // uncomment for Windows
-const database = process.env.DBNAME;
-const schema = 'pf';  // CHANGE to your username as schema for Lab 5
-                       // CHANGE to team schema for project
+const {
+  DBHOST: host,
+  USER: user,
+  PASSWORD: password,
+  DBNAME: database,
+  SCHEMA: schema = "pf",
+  DBPORT: port = 5342
+} = process.env;
 
-const pool = new Pool({user,password,host,database,port: 5432,});
+console.log({ host, user, password, database, schema, port })
+const pool = new Pool({ user, password, host, database, port, });
 
 pool.on('connect', client => {
-    client.query(`SET search_path = ${schema}, public;`)
+  console.log("on-connect fired")
+  client.query(`SET search_path = ${schema}, public;`)
 });
 
 pool.on('error', (err, client) => {
