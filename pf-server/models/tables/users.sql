@@ -6,7 +6,7 @@ create table pf.users (
     fname text,
     lname text,
     role text,
-    phone text,
+    phone text, 
     pronouns text
 );
 
