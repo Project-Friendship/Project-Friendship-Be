@@ -16,4 +16,4 @@ RUN npm install
 
 # Runs the dev npm script to build & start the server
 CMD npm run deploy
-#CMD npm run start
+#CMD npm run start 

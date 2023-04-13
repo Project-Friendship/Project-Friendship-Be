@@ -13,7 +13,7 @@ lib.setErrorPrefix(__filename);  // set label for lib error messages
 // database connection parameters
 const {
   DBHOST: host,
-  USER: user,
+  USERNAME: user,
   PASSWORD: password,
   DBNAME: database,
   SCHEMA: schema = "pf",

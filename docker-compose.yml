@@ -19,7 +19,7 @@ services:
     volumes:
       - data:/data/db
     environment:
-      - POSTGRES_USER=${USER}
+      - POSTGRES_USER=${USERNAME}
       - POSTGRES_PASSWORD=${PASSWORD}
       - POSTGRES_DB=${DBNAME}
 
