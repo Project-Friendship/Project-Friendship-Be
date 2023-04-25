@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require('./index');
 
 router.get('/', (request, response) => {
-    pool.query('SELECT * FROM users')
+    pool.query('SELECT * FROM pf.users')
 	.then(res => {
 	    // console.log('DB response: ' + JSON.stringify(res.rows));
 	    response.send(res.rows);

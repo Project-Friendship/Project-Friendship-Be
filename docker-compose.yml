@@ -10,8 +10,6 @@ services:
       - db
     volumes:
       - .:/usr/src/app
-    networks:
-      - db
 
   db:
     container_name: postgres
@@ -25,11 +23,6 @@ services:
       - POSTGRES_USER=${USERNAME}
       - POSTGRES_PASSWORD=${PASSWORD}
       - POSTGRES_DB=${DBNAME}
-    networks:
-      - db
 
 volumes: 
   data: {}
-networks:
-  db:
-    - 'localhost'
