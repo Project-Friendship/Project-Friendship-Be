@@ -9,19 +9,27 @@ services:
     depends_on:
       - db
     volumes:
-    - .:/usr/src/app
+      - .:/usr/src/app
+    networks:
+      - db
 
   db:
     container_name: postgres
     image: postgres
     ports:
-      - '5433:${DBPORT}'
+      - '5432:${DBPORT}'
     volumes:
       - data:/data/db
+      - .:/usr/src/app
     environment:
       - POSTGRES_USER=${USERNAME}
       - POSTGRES_PASSWORD=${PASSWORD}
       - POSTGRES_DB=${DBNAME}
+    networks:
+      - db
 
 volumes: 
- data: {}
+  data: {}
+networks:
+  db:
+    - 'localhost'
