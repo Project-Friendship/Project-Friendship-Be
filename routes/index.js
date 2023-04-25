@@ -17,7 +17,7 @@ const {
   PASSWORD: password,
   DBNAME: database,
   SCHEMA: schema = "pf",
-  DBPORT: port = 5342
+  DBPORT: port = 5432
 } = process.env;
 
 console.log({ host, user, password, database, schema, port })

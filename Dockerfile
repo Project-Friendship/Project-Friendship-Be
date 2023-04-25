@@ -14,6 +14,9 @@ COPY . .
 # Installs all packages
 RUN npm install
 
+#adds bash shell for db deploy
+RUN apk update && apk add bash
+
 # Runs the dev npm script to build & start the server
 CMD npm run deploy
 #CMD npm run start 

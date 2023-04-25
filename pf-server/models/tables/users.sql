@@ -11,8 +11,8 @@ create table pf.users (
 );
 
 -- important inserts to begin:
-INSERT INTO users (email, fname, lname, role, phone, pronouns) VALUES ('null', '', '', '', '', '', '');
-INSERT INTO users (email, fname, lname, role, phone, pronouns) VALUES ('kahnareeba@gmail.com', 'Areeba', 'Khan', 'admin', '314-745-9208', 'She/her/hers');
+INSERT INTO pf.users (email, fname, lname, role, phone, pronouns) VALUES ('null', '', '', '', '', '', '');
+INSERT INTO pf.users (email, fname, lname, role, phone, pronouns) VALUES ('kahnareeba@gmail.com', 'Areeba', 'Khan', 'admin', '314-745-9208', 'She/her/hers');
 
 -- example insert
 -- INSERT INTO users (email, fname, lname, role, phone) VALUES ('khan6@stolaf.edu', 'Areeba', 'Khan', 'mentor', '123-456-7890', 'She/her/hers');
@@ -22,7 +22,7 @@ INSERT INTO users (email, fname, lname, role, phone, pronouns) VALUES ('kahnaree
 
 
 -- table of users that have requested to sign up
-create table registerRequests (
+create table pf.registerRequests (
     email text primary key,
     fname text,
     lname text,
@@ -39,13 +39,13 @@ create table registerRequests (
 
 drop table sessions;
 
-create table sessions (
+create table pf.sessions (
     sid text primary key, -- secure session key
     email text,            -- authenticated email 
     notiftoken text
 );
 
-create function email(text) returns text as $$
+create function pf.semail(text) returns text as $$
     select email from sessions where sid = $1;
 $$ language 'sql';
 

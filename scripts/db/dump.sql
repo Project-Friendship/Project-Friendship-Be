@@ -1,3 +1,4 @@
+CREATE SCHEMA IF NOT EXISTS pf;
 CREATE TABLE IF NOT EXISTS pf.child
 (
     cid integer NOT NULL DEFAULT nextval('pf.child_cid_seq'::regclass),
@@ -8,7 +9,7 @@ CREATE TABLE IF NOT EXISTS pf.child
     pronouns text COLLATE pg_catalog."default",
     notes text COLLATE pg_catalog."default",
     CONSTRAINT child_pkey PRIMARY KEY (cid)
-)
+);
 
 CREATE TABLE IF NOT EXISTS pf.childrelationship
 (
@@ -17,7 +18,7 @@ CREATE TABLE IF NOT EXISTS pf.childrelationship
     email text COLLATE pg_catalog."default",
     isparent boolean,
     CONSTRAINT childrelationship_pkey PRIMARY KEY (rid)
-)
+);
 
 CREATE TABLE IF NOT EXISTS pf.events
 (
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS pf.events
     eventlocation text COLLATE pg_catalog."default",
     approvedby text COLLATE pg_catalog."default" DEFAULT 'null'::text,
     CONSTRAINT events_pkey PRIMARY KEY (eid)
-)
+);
 
 CREATE TABLE IF NOT EXISTS pf.log
 (
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS pf.log
     mentoremail text COLLATE pg_catalog."default",
     duration numeric,
     CONSTRAINT log_pkey PRIMARY KEY (lid)
-)
+);
 
 CREATE TABLE IF NOT EXISTS pf.registerrequests
 (
@@ -53,7 +54,7 @@ CREATE TABLE IF NOT EXISTS pf.registerrequests
     pronouns text COLLATE pg_catalog."default",
     daterequested text COLLATE pg_catalog."default",
     CONSTRAINT registerrequests_pkey PRIMARY KEY (email)
-)
+);
 
 CREATE TABLE IF NOT EXISTS pf.sessions
 (
@@ -61,7 +62,7 @@ CREATE TABLE IF NOT EXISTS pf.sessions
     email text COLLATE pg_catalog."default",
     notiftoken text COLLATE pg_catalog."default",
     CONSTRAINT sessions_pkey PRIMARY KEY (sid)
-)
+);
 
 CREATE TABLE IF NOT EXISTS pf.users
 (
@@ -72,7 +73,7 @@ CREATE TABLE IF NOT EXISTS pf.users
     phone text COLLATE pg_catalog."default",
     pronouns text COLLATE pg_catalog."default",
     CONSTRAINT users_pkey PRIMARY KEY (email)
-)
+);
 
-INSERT INTO users (email, fname, lname, role, phone, pronouns) VALUES ('null', '', '', '', '', '', '');
-INSERT INTO users (email, fname, lname, role, phone, pronouns) VALUES ('kahnareeba@gmail.com', 'Areeba', 'Khan', 'admin', '314-745-9208', 'She/her/hers');
+INSERT INTO pf.users (email, fname, lname, role, phone, pronouns) VALUES ('null', '', '', '', '', '', '');
+INSERT INTO pf.users (email, fname, lname, role, phone, pronouns) VALUES ('kahnareeba@gmail.com', 'Areeba', 'Khan', 'admin', '314-745-9208', 'She/her/hers');
