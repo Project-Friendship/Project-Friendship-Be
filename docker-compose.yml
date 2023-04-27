@@ -20,7 +20,7 @@ services:
       - data:/data/db
       - .:/usr/src/app
     environment:
-      - POSTGRES_USER=${USERNAME}
+      - POSTGRES_USER=${USER_NAME}
       - POSTGRES_PASSWORD=${PASSWORD}
       - POSTGRES_DB=${DBNAME}
 
