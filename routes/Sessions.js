@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('./index');
+const { IsAuthorized } = require('../middleware/IsAuthorized');
 
 // delete session key
 router.delete('/:email/:sid', (request, response) => {
