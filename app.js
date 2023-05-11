@@ -37,6 +37,7 @@ const childRoute = require("./routes/Child");
 const childRelationshipRoute = require("./routes/ChildRelationship");
 const rootRoute = require("./routes/Root");
 
+
 app.use('/users', usersRoute);
 app.use('/register', registerRoute);
 app.use('/relationship', relationshipRoute);
@@ -49,7 +50,7 @@ app.use('/', rootRoute);
 
 app.use(function(request, response, next) {
   // catch 404 and forward to error handler
-  console.error("EEError!");
+  console.error("Error!");
   var err = new Error('Not Found');
   err.status = 404;
   next(err);

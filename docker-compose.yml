@@ -19,10 +19,10 @@ services:
     volumes:
       - data:/data/db
       - .:/usr/src/app
+      - ./scripts/db:/docker-entrypoint-initdb.d/
     environment:
       - POSTGRES_USER=${USER_NAME}
       - POSTGRES_PASSWORD=${PASSWORD}
       - POSTGRES_DB=${DBNAME}
-
 volumes: 
   data: {}
