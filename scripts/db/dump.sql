@@ -1,54 +1,57 @@
 CREATE SCHEMA IF NOT EXISTS pf;
-CREATE TABLE IF NOT EXISTS pf.child
+CREATE TABLE IF NOT EXISTS pf.user
 (
-    cid  SERIAL PRIMARY KEY,
+    id integer NOT NULL DEFAULT nextval('pf.user_id_seq'::regclass),
     fname text COLLATE pg_catalog."default",
     lname text COLLATE pg_catalog."default",
+    email text COLLATE pg_catalog."default",
+    phone text COLLATE pg_catalog."default",
     dob text COLLATE pg_catalog."default",
     school text COLLATE pg_catalog."default",
     pronouns text COLLATE pg_catalog."default",
-    notes text COLLATE pg_catalog."default"
+    notes text COLLATE pg_catalog."default",
+    CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS pf.childrelationship
+CREATE TABLE IF NOT EXISTS pf.role
 (
-    rid  SERIAL PRIMARY KEY,
-    cid integer,
-    email text COLLATE pg_catalog."default",
-    isparent boolean
+    id integer NOT NULL DEFAULT nextval('pf.role_id_seq'::regclass),
+    roleName integer,
+    CONSTRAINT role_pkey PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS pf.account
+(
+    id integer NOT NULL DEFAULT nextval('pf.account_id_seq'::regclass),
+    userId integer,
+    groupId integer,
+    roleId integer,
+    isparent boolean,
+    CONSTRAINT account_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS pf.group
+(
+    id integer NOT NULL DEFAULT nextval('pf.group_id_seq'::regclass),
+    groupName text COLLATE pg_catalog."default",
+    CONSTRAINT group_pkey PRIMARY KEY (id)
+);
+
+
 
 CREATE TABLE IF NOT EXISTS pf.events
 (
-    eid  SERIAL PRIMARY KEY,
+    eid integer NOT NULL DEFAULT nextval('pf.events_eid_seq'::regclass),
     author text COLLATE pg_catalog."default",
-    cid integer,
+    childId integer,
     stat text COLLATE pg_catalog."default" DEFAULT 'pending'::text,
     title text COLLATE pg_catalog."default",
     descrip text COLLATE pg_catalog."default",
     eventdate text COLLATE pg_catalog."default",
     eventcreated text COLLATE pg_catalog."default",
     eventlocation text COLLATE pg_catalog."default",
-    approvedby text COLLATE pg_catalog."default" DEFAULT 'null'::text
-);
-
-CREATE TABLE IF NOT EXISTS pf.log
-(
-    lid  SERIAL PRIMARY KEY,
-    eid integer,
-    mentoremail text COLLATE pg_catalog."default",
-    duration numeric
-);
-
-CREATE TABLE IF NOT EXISTS pf.registerrequests
-(
-    email text COLLATE pg_catalog."default" NOT NULL,
-    fname text COLLATE pg_catalog."default",
-    lname text COLLATE pg_catalog."default",
-    role text COLLATE pg_catalog."default",
-    phone text COLLATE pg_catalog."default",
-    pronouns text COLLATE pg_catalog."default",
-    daterequested text COLLATE pg_catalog."default"
+    approvedby text COLLATE pg_catalog."default" DEFAULT 'null'::text,
+    CONSTRAINT events_pkey PRIMARY KEY (eid)
 );
 
 CREATE TABLE IF NOT EXISTS pf.sessions
@@ -58,16 +61,5 @@ CREATE TABLE IF NOT EXISTS pf.sessions
     notiftoken text COLLATE pg_catalog."default"
 );
 
-CREATE TABLE IF NOT EXISTS pf.users
-(
-    email text COLLATE pg_catalog."default" NOT NULL,
-    fname text COLLATE pg_catalog."default",
-    lname text COLLATE pg_catalog."default",
-    role text COLLATE pg_catalog."default",
-    phone text COLLATE pg_catalog."default",
-    pronouns text COLLATE pg_catalog."default"
-);
-
-INSERT INTO pf.users (email, fname, lname, role, phone, pronouns) VALUES ('null', '', '', '', '', '');
-INSERT INTO pf.users (email, fname, lname, role, phone, pronouns) VALUES ('kahnareeba@gmail.com', 'Areeba', 'Khan', 'admin', '314-745-9208', 'She/her/hers');
-INSERT INTO pf.users (email, fname, lname, role, phone, pronouns) VALUES ('dschoenbauer@gmail.com', 'David', 'Schoenbauer', 'admin', '651-226-1901', 'He/Him/His');
+INSERT INTO pf.user (email, fname, lname, role, phone, pronouns) VALUES ('null', '', '', '', '', '', '');
+INSERT INTO pf.user (email, fname, lname, role, phone, pronouns) VALUES ('kahnareeba@gmail.com', 'Areeba', 'Khan', 'admin', '314-745-9208', 'She/her/hers');
